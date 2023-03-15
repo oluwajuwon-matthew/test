@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        height: 100vh;
+        display: grid;
+        place-content: center;
+        gap: 3rem;
+      }
+      div {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        position: relative;
+      }
+      p {
+        font-size: 7rem;
+        font-weight: 600;
+      }
+      p::after {
+        content: "";
+        border-top: 10px solid red;
+        border-bottom: 10px solid red;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      p::before {
+        content: "";
+        border-top: 10px solid red;
+        border-bottom: 10px solid red;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      button {
+        padding: 0.5rem 2rem;
+        border-radius: 5px;
+        border: none;
+        background-color: blue;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        width: 20rem;
+        margin: 0 auto;
+        transition: 0.5s ease-in-out;
+        text-align: center;
+      }
+
+      button:hover {
+        background-color: transparent;
+        outline: 1px solid blue;
+        color: blue;
+        transform: scale(0.8);
+      }
+    </style>
+    <!-- Display the countdown timer in an element -->
+    <div>
+      <p id="demo">00:00:00</p>
+    </div>
+    <button onclick="x()">START</button>
+    <script>
+      // Set the date we're counting down to
+      var countDownDate = new Date("Mar 15, 2023 12:26:00").getTime();
+
+      // Update the count down every 1 second
+      const x = () =>
+        setInterval(() => {
+          // Get today's date and time
+          var now = new Date().getTime();
+
+          // Find the distance between now and the count down date
+          var distance = countDownDate - now;
+
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Display the result in the element with id="demo"
+          document.getElementById("demo").innerHTML =
+            hours + ":" + minutes + ":" + seconds;
+
+          // If the count down is finished, write some text
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+          }
+        }, 1000);
+    </script>
+  </body>
+</html>
